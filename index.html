@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="description"
+      content="Abhishek J — Frontend Developer specializing in React, JavaScript and WordPress. BCA graduate, PES University. Built Nexa Styles e-commerce platform and maintains live production sites."
+    />
+    <meta property="og:title" content="Abhishek J — Frontend Developer" />
+    <meta
+      property="og:description"
+      content="Frontend Developer skilled in React, JavaScript, TypeScript and WordPress. Explore my projects, experience and skills in an interactive terminal."
+    />
+    <meta property="og:type" content="website" />
+    <title>Abhishek J — Frontend Developer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <noscript>
+      <style>
+        #bootScreen,
+        #app {
+          display: none !important;
+        }
+      </style>
+    </noscript>
+  </head>
+
+  <body>
+    <noscript>
+      <div class="noscript-fallback">
+        <h1>Abhishek J — Frontend Developer</h1>
+        <p>
+          BCA Graduate · Frontend Developer · WordPress Developer
+        </p>
+        <p>
+          This site works best with JavaScript enabled. Here's the
+          essentials in the meantime:
+        </p>
+        <ul>
+          <li>Email: <a href="mailto:aj29abhishek@gmail.com">aj29abhishek@gmail.com</a></li>
+          <li>LinkedIn: <a href="https://www.linkedin.com/in/abhishek-j-dev">linkedin.com/in/abhishek-j-dev</a></li>
+          <li>GitHub: <a href="https://github.com/abhishek-29-dev">github.com/abhishek-29-dev</a></li>
+          <li><a href="Abhishek_J_Resume.pdf" download>Download resume (PDF)</a></li>
+        </ul>
+      </div>
+    </noscript>
+
+    <div class="boot-screen" id="bootScreen">
+      <div class="boot-line">
+        BIOS :: ABHISHEK DEV PORTFOLIO
+      </div>
+
+      <div class="boot-line">
+        Loading system...
+      </div>
+
+      <div class="boot-line">
+        Checking modules...
+        <span>OK</span>
+      </div>
+
+      <div class="boot-line">
+        Starting portfolio shell...
+      </div>
+
+      <div class="boot-skip">
+        press any key to skip
+      </div>
+    </div>
+
+    <div class="app" id="app">
+      <header class="topbar">
+        <div class="window-controls">
+          <span class="control red"></span>
+          <span class="control yellow"></span>
+          <span class="control green"></span>
+        </div>
+
+        <div class="terminal-title">
+          abhishek@dev: ~/portfolio
+        </div>
+
+        <div class="topbar-status">
+          <span></span>
+          online
+        </div>
+      </header>
+
+      <div class="terminal-layout">
+        <aside class="sidebar">
+          <div class="side-profile">
+            <div class="avatar">AJ</div>
+
+            <div>
+              <strong>Abhishek J</strong>
+              <small>BCA Graduate</small>
+            </div>
+          </div>
+
+          <div class="side-label">
+            COMMANDS
+          </div>
+
+          <button
+            class="command-btn active"
+            data-command="home"
+            type="button"
+          >
+            ./home
+          </button>
+
+          <button
+            class="command-btn"
+            data-command="about"
+            type="button"
+          >
+            cat about.txt
+          </button>
+
+          <button
+            class="command-btn"
+            data-command="skills"
+            type="button"
+          >
+            ls skills/
+          </button>
+
+          <button
+            class="command-btn"
+            data-command="projects"
+            type="button"
+          >
+            ls projects/
+          </button>
+
+          <button
+            class="command-btn"
+            data-command="experience"
+            type="button"
+          >
+            cat experience.log
+          </button>
+
+          <button
+            class="command-btn"
+            data-command="certificate"
+            type="button"
+          >
+            cat certificate.pdf
+          </button>
+
+          <button
+            class="command-btn"
+            data-command="contact"
+            type="button"
+          >
+            ./contact
+          </button>
+
+          <div class="sidebar-bottom">
+            <span>STATUS</span>
+
+            <strong>open_to_work=true</strong>
+
+            <a
+              href="Abhishek_J_Resume.pdf"
+              download
+            >
+              ./download_resume
+            </a>
+          </div>
+        </aside>
+
+        <main class="terminal">
+          <div
+            class="terminal-body"
+            id="terminalOutput"
+            aria-live="polite"
+          ></div>
+
+          <form
+            class="terminal-input"
+            id="terminalForm"
+          >
+            <span class="prompt">
+              abhishek@dev:~$
+            </span>
+
+            <input
+              id="commandInput"
+              type="text"
+              autocomplete="off"
+              spellcheck="false"
+              aria-label="Terminal command"
+              placeholder="type a command..."
+            />
+          </form>
+
+          <div class="command-help">
+            Type <b>help</b> to see commands · Use ↑ / ↓ for history
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
