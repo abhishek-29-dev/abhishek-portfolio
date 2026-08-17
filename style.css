@@ -1,17 +1,17 @@
 :root {
-  --bg: #070a09;
-  --panel: #0b100e;
-  --panel-2: #0e1512;
-  --border: #1b2a23;
-  --green: #55ff9a;
-  --green-soft: #9dffbd;
-  --cyan: #59e7ff;
-  --yellow: #ffe27a;
-  --red: #ff6b6b;
-  --text: #d7e6dc;
-  --muted: #8b998f;
-  --white: #f0fff5;
-  --shadow: rgba(0, 0, 0, 0.45);
+  --bg: #0000aa;
+  --panel: #0000aa;
+  --panel-2: #0a0ac2;
+  --border: #ffffff;
+  --green: #55ff55;
+  --green-soft: #aaffaa;
+  --cyan: #55ffff;
+  --yellow: #ffff55;
+  --red: #ff5555;
+  --text: #ffffff;
+  --muted: #b6b6e0;
+  --white: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.55);
 }
 
 * {
@@ -26,7 +26,7 @@ body {
   margin: 0;
   min-height: 100vh;
   overflow: hidden;
-  background: var(--bg);
+  background: #000030;
   color: var(--text);
   font-family: "JetBrains Mono", monospace;
 }
@@ -46,8 +46,8 @@ a {
 }
 
 ::selection {
-  background: var(--green);
-  color: yellow;
+  background: var(--white);
+  color: var(--bg);
 }
 
 body::before {
@@ -57,7 +57,7 @@ body::before {
   pointer-events: none;
   z-index: 20;
   background: linear-gradient(
-    rgba(85, 255, 154, 0.018) 50%,
+    rgba(255, 255, 255, 0.02) 50%,
     transparent 50%
   );
   background-size: 100% 4px;
@@ -73,7 +73,7 @@ body::after {
   background: radial-gradient(
     circle at center,
     transparent 35%,
-    rgba(0, 0, 0, 0.42) 100%
+    rgba(0, 0, 0, 0.5) 100%
   );
 }
 
@@ -87,7 +87,7 @@ body::after {
 }
 
 .noscript-fallback h1 {
-  color: var(--green);
+  color: var(--white);
   font-size: 22px;
 }
 
@@ -100,7 +100,7 @@ body::after {
   position: absolute;
   bottom: 6vh;
   left: 10vw;
-  color: #445149;
+  color: var(--muted);
   font-size: 11px;
   letter-spacing: 0.08em;
   animation: bootLine 0.25s forwards;
@@ -112,8 +112,8 @@ body::after {
   inset: 0;
   z-index: 100;
   padding: 10vh 10vw;
-  background: #020403;
-  color: var(--green);
+  background: var(--bg);
+  color: var(--white);
   font-size: 13px;
   line-height: 2;
   transition:
@@ -149,7 +149,7 @@ body::after {
 }
 
 .boot-screen span {
-  color: var(--green-soft);
+  color: var(--yellow);
 }
 
 @keyframes bootLine {
@@ -165,12 +165,10 @@ body::after {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 3px solid var(--border);
+  border-radius: 0;
   background: var(--panel);
-  box-shadow:
-    0 35px 90px var(--shadow),
-    0 0 0 1px rgba(85, 255, 154, 0.025);
+  box-shadow: 10px 10px 0 var(--shadow);
   opacity: 0;
   transform: translateY(10px);
   transition:
@@ -190,8 +188,8 @@ body::after {
   grid-template-columns: 160px 1fr 160px;
   align-items: center;
   padding: 0 16px;
-  border-bottom: 1px solid var(--border);
-  background: #0c110f;
+  border-bottom: 3px solid var(--border);
+  background: var(--panel-2);
 }
 
 .window-controls {
@@ -200,9 +198,10 @@ body::after {
 }
 
 .control {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 0;
+  border: 1px solid var(--white);
 }
 
 .control.red {
@@ -219,13 +218,14 @@ body::after {
 
 .terminal-title {
   text-align: center;
-  color: var(--muted);
+  color: var(--white);
   font-size: 11px;
+  letter-spacing: 0.04em;
 }
 
 .topbar-status {
   justify-self: end;
-  color: var(--muted);
+  color: var(--white);
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -233,12 +233,12 @@ body::after {
 
 .topbar-status span {
   display: inline-block;
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   margin-right: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  box-shadow: 0 0 10px var(--green);
+  border-radius: 0;
+  background: var(--yellow);
+  box-shadow: none;
 }
 
 .terminal-layout {
@@ -253,8 +253,8 @@ body::after {
   flex-direction: column;
   min-width: 0;
   padding: 20px 14px;
-  border-right: 1px solid var(--border);
-  background: #080d0b;
+  border-right: 3px solid var(--border);
+  background: var(--panel-2);
 }
 
 .side-profile {
@@ -270,10 +270,10 @@ body::after {
   height: 38px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(85, 255, 154, 0.4);
-  border-radius: 8px;
-  color: var(--green);
-  background: rgba(85, 255, 154, 0.04);
+  border: 2px solid var(--white);
+  border-radius: 0;
+  color: var(--white);
+  background: transparent;
   font-size: 12px;
   font-weight: 700;
 }
@@ -293,7 +293,7 @@ body::after {
 
 .side-label {
   margin: 22px 7px 8px;
-  color: #445149;
+  color: var(--muted);
   font-size: 9px;
   letter-spacing: 0.15em;
 }
@@ -302,9 +302,9 @@ body::after {
   width: 100%;
   padding: 10px 9px;
   border: 0;
-  border-radius: 5px;
+  border-radius: 0;
   background: transparent;
-  color: var(--muted);
+  color: var(--white);
   text-align: left;
   font-size: 10px;
   cursor: pointer;
@@ -312,18 +312,18 @@ body::after {
 }
 
 .command-btn:hover {
-  background: rgba(85, 255, 154, 0.06);
-  color: var(--green-soft);
+  background: var(--white);
+  color: var(--bg);
 }
 
 .command-btn.active {
-  background: rgba(85, 255, 154, 0.06);
-  color: var(--green-soft);
+  background: var(--white);
+  color: var(--bg);
 }
 
 .command-btn.active::before {
   content: "> ";
-  color: var(--green);
+  color: var(--bg);
 }
 
 .sidebar-bottom {
@@ -335,7 +335,7 @@ body::after {
 .sidebar-bottom span {
   display: block;
   margin-bottom: 8px;
-  color: #445149;
+  color: var(--muted);
   font-size: 9px;
   letter-spacing: 0.15em;
 }
@@ -343,7 +343,7 @@ body::after {
 .sidebar-bottom strong {
   display: block;
   margin-bottom: 12px;
-  color: var(--green);
+  color: var(--yellow);
   font-size: 9px;
   font-weight: 400;
 }
@@ -357,6 +357,7 @@ body::after {
 
 .sidebar-bottom a:hover {
   color: var(--white);
+  text-decoration: underline;
 }
 
 .terminal {
@@ -364,13 +365,7 @@ body::after {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  background:
-    radial-gradient(
-      circle at 80% 0%,
-      rgba(85, 255, 154, 0.035),
-      transparent 30%
-    ),
-    var(--panel);
+  background: var(--panel);
 }
 
 .terminal-body {
@@ -379,7 +374,7 @@ body::after {
   overflow-y: auto;
   padding: 34px clamp(22px, 4vw, 58px);
   scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
+  scrollbar-color: var(--white) transparent;
 }
 
 .terminal-body::-webkit-scrollbar {
@@ -391,8 +386,8 @@ body::after {
 }
 
 .terminal-body::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 10px;
+  background: var(--white);
+  border-radius: 0;
 }
 
 .output-block {
@@ -401,7 +396,7 @@ body::after {
 
 .output-command {
   margin-bottom: 12px;
-  color: var(--green);
+  color: var(--yellow);
   font-size: 12px;
 }
 
@@ -442,15 +437,15 @@ body::after {
 }
 
 .output-content .big {
-  color: var(--green);
+  color: var(--white);
   font-size: clamp(25px, 4vw, 48px);
   line-height: 1.15;
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.03em;
 }
 
 .output-content .ascii {
-  color: var(--green);
+  color: var(--white);
   white-space: pre;
   overflow-x: auto;
   line-height: 1.2;
@@ -480,22 +475,22 @@ body::after {
   max-width: 760px;
   margin: 15px 0;
   padding: 16px;
-  border: 1px solid var(--border);
-  border-left: 2px solid var(--green);
-  background: rgba(255, 255, 255, 0.015);
+  border: 2px solid var(--border);
+  border-left: 4px solid var(--yellow);
+  background: rgba(255, 255, 255, 0.04);
   transition:
     background 0.2s ease,
     transform 0.2s ease;
 }
 
 .project-terminal-card:hover {
-  background: rgba(85, 255, 154, 0.025);
+  background: rgba(255, 255, 255, 0.09);
   transform: translateX(4px);
 }
 
 .project-terminal-card h3 {
   margin: 0 0 8px;
-  color: var(--green-soft);
+  color: var(--white);
   font-size: 13px;
 }
 
@@ -523,15 +518,15 @@ body::after {
   max-width: 820px;
   margin: 16px 0;
   padding: 18px;
-  border: 1px solid var(--border);
-  border-left: 2px solid var(--cyan);
-  background: rgba(255, 255, 255, 0.015);
-  box-shadow: inset 0 0 30px rgba(89, 231, 255, 0.015);
+  border: 2px solid var(--border);
+  border-left: 4px solid var(--cyan);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: none;
 }
 
 .certificate-terminal-card h3 {
   margin: 14px 0 16px;
-  color: var(--green-soft);
+  color: var(--white);
   font-size: 15px;
 }
 
@@ -576,21 +571,22 @@ body::after {
 }
 
 .certificate-view-btn {
-  border-color: rgba(89, 231, 255, 0.45);
+  border-color: var(--cyan);
   color: var(--cyan);
-  background: rgba(89, 231, 255, 0.035);
+  background: transparent;
 }
 
 .certificate-download-btn {
-  color: var(--green);
-  background: rgba(85, 255, 154, 0.025);
+  border-color: var(--yellow);
+  color: var(--yellow);
+  background: transparent;
 }
 
 .certificate-view-btn:hover,
 .certificate-download-btn:hover {
-  color: var(--white);
-  border-color: var(--green);
-  background: rgba(85, 255, 154, 0.07);
+  color: var(--bg);
+  border-color: var(--white);
+  background: var(--white);
   transform: translateY(-1px);
 }
 
@@ -599,13 +595,13 @@ body::after {
   align-items: center;
   gap: 10px;
   padding: 15px clamp(22px, 4vw, 58px);
-  border-top: 1px solid var(--border);
-  background: #080d0b;
+  border-top: 3px solid var(--border);
+  background: var(--panel-2);
 }
 
 .prompt {
   flex: 0 0 auto;
-  color: var(--green);
+  color: var(--yellow);
   font-size: 12px;
 }
 
@@ -617,22 +613,22 @@ body::after {
   background: transparent;
   color: var(--white);
   font-size: 12px;
-  caret-color: var(--green);
+  caret-color: var(--white);
 }
 
 #commandInput::placeholder {
-  color: #39463f;
+  color: var(--muted);
 }
 
 .command-help {
   padding: 0 58px 14px;
-  color: #3f4d45;
-  background: #080d0b;
+  color: var(--muted);
+  background: var(--panel-2);
   font-size: 8px;
 }
 
 .command-help b {
-  color: #607169;
+  color: var(--white);
 }
 
 @media (max-width: 800px) {
@@ -644,7 +640,7 @@ body::after {
     width: calc(100% - 14px);
     height: calc(100vh - 14px);
     margin: 7px auto;
-    border-radius: 8px;
+    border-radius: 0;
   }
 
   .topbar {
