@@ -197,7 +197,7 @@ function showHome() {
       <div style="margin-top:18px" class="dim">
         I build responsive websites,
         e-commerce experiences and
-        clean user interfaces.
+        React-based user interfaces.
       </div>
 
       <div style="margin-top:24px" class="ascii">
@@ -305,6 +305,16 @@ function showAbout() {
         During my internship at Ratxen Solutions,
         I worked on Nexa Styles and production
         WordPress websites.
+
+        <br><br>
+
+        I've also been building out a set of
+        React projects — a recipe search app,
+        an expense tracker — to go deeper on
+        component architecture, state, and
+        TypeScript. See
+        <span class="cyan">projects</span>
+        for links.
       </div>
 
       <br>
@@ -365,9 +375,23 @@ function showSkills() {
         </div>
 
         <div class="line">
-          &nbsp;&nbsp;└──
+          &nbsp;&nbsp;├──
           <span class="file">
             React
+          </span>
+        </div>
+
+        <div class="line">
+          &nbsp;&nbsp;├──
+          <span class="file">
+            React Router
+          </span>
+        </div>
+
+        <div class="line">
+          &nbsp;&nbsp;└──
+          <span class="file">
+            Tailwind CSS
           </span>
         </div>
 
@@ -421,9 +445,23 @@ function showSkills() {
         </div>
 
         <div class="line">
-          &nbsp;&nbsp;└──
+          &nbsp;&nbsp;├──
           <span class="file">
             VS Code
+          </span>
+        </div>
+
+        <div class="line">
+          &nbsp;&nbsp;├──
+          <span class="file">
+            Vite
+          </span>
+        </div>
+
+        <div class="line">
+          &nbsp;&nbsp;└──
+          <span class="file">
+            Vercel
           </span>
         </div>
 
@@ -435,9 +473,16 @@ function showSkills() {
         </div>
 
         <div class="line">
+          &nbsp;&nbsp;├──
+          <span class="file">
+            REST API Integration
+          </span>
+        </div>
+
+        <div class="line">
           &nbsp;&nbsp;└──
           <span class="file">
-            API Integration
+            Recharts
           </span>
         </div>
 
@@ -482,7 +527,91 @@ function showProjects() {
 
       <div class="project-terminal-card">
         <h3>
-          02 :: mva-trust &amp; ncpl/
+          02 :: recipe-finder/
+        </h3>
+
+        <p>
+          Recipe search app built with React,
+          hitting a live public API. Debounced
+          search, a responsive card grid, a
+          detail modal with full ingredients and
+          instructions, and a favorites system
+          using React state.
+        </p>
+
+        <div class="tags">
+          <span>React</span>
+          <span>JavaScript</span>
+          <span>Tailwind CSS</span>
+          <span>REST API</span>
+        </div>
+
+        <div class="certificate-actions" style="margin-top:10px">
+          <a
+            class="certificate-view-btn"
+            href="https://recipe-finder-abhi-64da.vercel.app"
+            target="_blank"
+            rel="noopener"
+          >
+            live demo ↗
+          </a>
+
+          <a
+            class="certificate-view-btn"
+            href="https://github.com/abhishek-29-dev/recipe-finder"
+            target="_blank"
+            rel="noopener"
+          >
+            view code ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="project-terminal-card">
+        <h3>
+          03 :: expense-tracker/
+        </h3>
+
+        <p>
+          Expense tracker built with React and
+          TypeScript — typed Expense and Category
+          interfaces throughout, no "any". Category
+          spending chart with Recharts, plus
+          date-range and category filtering with a
+          live-updating total.
+        </p>
+
+        <div class="tags">
+          <span>React</span>
+          <span>TypeScript</span>
+          <span>Recharts</span>
+          <span>Tailwind CSS</span>
+        </div>
+
+        <div class="certificate-actions" style="margin-top:10px">
+          <a
+            class="certificate-view-btn"
+            href="https://expense-tracker-eta-two-93.vercel.app"
+            target="_blank"
+            rel="noopener"
+          >
+            live demo ↗
+          </a>
+
+          <a
+            class="certificate-view-btn"
+            href="https://github.com/abhishek-29-dev/expense-tracker"
+            target="_blank"
+            rel="noopener"
+          >
+            view code ↗
+          </a>
+        </div>
+      </div>
+
+      <div class="project-terminal-card">
+        <h3>
+          04 :: mva-trust &amp; ncpl/
         </h3>
 
         <p>
@@ -522,7 +651,7 @@ function showProjects() {
 
       <div class="project-terminal-card">
         <h3>
-          03 :: portfolio/
+          05 :: portfolio/
         </h3>
 
         <p>
@@ -556,7 +685,7 @@ function showProjects() {
       </div>
 
       <div class="dim">
-        3 projects displayed.
+        5 projects displayed.
       </div>
     `
   );
