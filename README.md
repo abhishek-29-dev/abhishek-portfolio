@@ -2,7 +2,7 @@
 
 An interactive, terminal-styled developer portfolio. Instead of scrolling through sections, you type commands (or click sidebar shortcuts) to explore projects, skills, and experience.
 
-**Live site:** [your-github-pages-link-here](#)
+**Live site:** [(https://abhishek-29-dev.github.io/abhishek-portfolio/)](#)
 
 ## Features
 
@@ -37,9 +37,16 @@ abhishek-portfolio/
 └── Abhishek_J_Internship_Certificate.pdf
 ```
 
+## Related Projects
+
+Featured on the site's `projects` command, with live demos and source:
+
+- **[Recipe Finder](https://recipe-finder-abhi-64da.vercel.app)** — React recipe search app with debounced search, favorites, and a live public API. [Code](https://github.com/abhishek-29-dev/recipe-finder)
+- **[Expense Tracker](https://expense-tracker-eta-two-93.vercel.app)** — React + TypeScript expense tracker with typed interfaces, category charts, and filtering. [Code](https://github.com/abhishek-29-dev/expense-tracker)
+
 ## About Me
 
-Frontend Developer with hands-on experience building production websites, including a full-stack e-commerce platform (payment gateway, subscriptions, shipping API integration) and WordPress-based business sites. BCA graduate, PES University.
+Frontend Developer with hands-on experience building production websites, including a full-stack e-commerce platform (payment gateway, subscriptions, shipping API integration) and WordPress-based business sites, plus React/TypeScript projects built independently. BCA graduate, PES University.
 
 - Email: aj29abhishek@gmail.com
 - LinkedIn: [linkedin.com/in/abhishek-j-dev](https://www.linkedin.com/in/abhishek-j-dev)
