@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.vercel
+
+# Local copy of the old vanilla portfolio (superseded by the React build)
+legacy/
+
+# Dev / verification artifacts
+*.png
+*.jpg
+*.jpeg

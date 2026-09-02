@@ -1,40 +1,44 @@
 # Abhishek J — Portfolio
 
-An interactive, terminal-styled developer portfolio. Instead of scrolling through sections, you type commands (or click sidebar shortcuts) to explore projects, skills, and experience.
+An interactive, terminal-styled developer portfolio built with React. Instead of scrolling through sections, you type commands (or click sidebar shortcuts) to explore projects, skills, and experience.
 
-**Live site:** [(https://abhishek-29-dev.github.io/abhishek-portfolio/)](#)
+**Live site:** [abhishek-29-dev.github.io/abhishek-portfolio](https://abhishek-29-dev.github.io/abhishek-portfolio/)
 
 ## Features
 
-- Fully functional command-line interface — try `help`, `about`, `skills`, `projects`, `experience`, `certificate`, `resume`, `contact`
+- Fully functional command-line interface — try `help`, `about`, `skills`, `projects`, `experience`, `certificate`, `resume`, `contact`, `neofetch`
 - Command history (↑ / ↓ arrows) and Tab autocomplete, like a real shell
 - Sidebar shortcuts for anyone who'd rather click than type
-- Boot-up animation (skippable — press any key)
+- Boot-up BIOS animation (skippable — press any key)
+- Blue / green theme toggle, key-press sound effects, block cursor, and a powerline-style status bar
 - Fully responsive, keyboard accessible, and respects reduced-motion preferences
 
 ## Tech Stack
 
-- HTML5, CSS3, vanilla JavaScript (no frameworks — DOM manipulation, event delegation, XSS-safe output rendering)
+- React 19 + TypeScript
+- Vite 6 (build tool)
 - Google Fonts (JetBrains Mono)
 
 ## Run it locally
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/abhishek-portfolio.git
+git clone https://github.com/abhishek-29-dev/abhishek-portfolio.git
 cd abhishek-portfolio
+npm install
+npm run dev
 ```
 
-Then just open `index.html` in a browser — no build step or dependencies required.
+Open the printed local URL. For a production build: `npm run build` (outputs to `docs/`, which GitHub Pages serves).
 
 ## Project Structure
 
 ```
 abhishek-portfolio/
-├── index.html
-├── style.css
-├── script.js
-├── Abhishek_J_Resume.pdf
-└── Abhishek_J_Internship_Certificate.pdf
+├── src/            # React source (components, hooks, data, styles)
+├── public/         # Static assets (resume / certificate PDFs)
+├── docs/           # Built output — served by GitHub Pages
+├── vite.config.ts
+└── package.json
 ```
 
 ## Related Projects
