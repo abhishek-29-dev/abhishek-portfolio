@@ -15,7 +15,7 @@ export function CommandInput({ history, ready, cwd, onCommand }: CommandInputPro
   const [cursor, setCursor] = useState(0); // index into history; history.length = "new command"
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Focus the input as soon as the boot screen is dismissed (matches the vanilla flow).
+  // Take focus as soon as the boot screen is dismissed.
   useEffect(() => {
     if (ready) {
       inputRef.current?.focus();

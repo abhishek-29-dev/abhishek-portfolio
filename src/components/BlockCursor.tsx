@@ -1,67 +1,61 @@
 import { useEffect, useRef } from "react";
 
-/**
- * Terminal-style block cursor that replaces the OS pointer over the shell.
- * The OS cursor is hidden with CSS (`cursor: none`) only on fine pointers;
- * this block follows the mouse via a RAF-throttled handler and flashes white
- * when hovering something clickable.
- */
+/** Anything the block cursor should light up when hovered. */
 const INTERACTIVE = "a, button, [data-run], input";
 
+/** Anywhere the block cursor should be visible at all. */
+const IN_SHELL = ".terminal, .sidebar";
+
+/**
+ * Terminal-style block cursor that stands in for the OS pointer over the shell.
+ * CSS hides the real cursor on fine pointers; this one follows the mouse and
+ * flashes white over anything clickable.
+ */
 export function BlockCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const pendingRef = useRef(false);
-  const overShellRef = useRef(false);
+  const mouse = useRef({ x: 0, y: 0 });
+  const paintQueued = useRef(false);
 
   useEffect(() => {
     const cursor = cursorRef.current;
     if (!cursor) return;
 
+    /** Move the cursor and update its hover state from whatever is under it. */
     const paint = () => {
-      pendingRef.current = false;
-      const { x, y } = mouseRef.current;
+      paintQueued.current = false;
+      const { x, y } = mouse.current;
       cursor.style.transform = `translate(${x + 6}px, ${y + 6}px)`;
 
-      const element = document.elementFromPoint(x, y) as HTMLElement | null;
-      const inShell = !!element && Boolean(element.closest(".terminal, .sidebar"));
-      const hot = !!element && Boolean(element.closest(INTERACTIVE));
+      const under = document.elementFromPoint(x, y);
+      const inShell = Boolean(under?.closest(IN_SHELL));
+      const clickable = Boolean(under?.closest(INTERACTIVE));
 
-      if (inShell && !overShellRef.current) {
-        overShellRef.current = true;
-        cursor.classList.add("on");
-      } else if (!inShell && overShellRef.current) {
-        overShellRef.current = false;
-        cursor.classList.remove("on");
-      }
-      cursor.classList.toggle("hot", inShell && hot);
+      cursor.classList.toggle("on", inShell);
+      cursor.classList.toggle("hot", inShell && clickable);
     };
 
+    /**
+     * Coalesce events into one paint per frame — mousemove fires far more
+     * often than the screen refreshes.
+     */
     const onMove = (event: MouseEvent) => {
-      mouseRef.current = { x: event.clientX, y: event.clientY };
-      if (!pendingRef.current) {
-        pendingRef.current = true;
-        requestAnimationFrame(paint);
-      }
+      mouse.current = { x: event.clientX, y: event.clientY };
+      if (paintQueued.current) return;
+      paintQueued.current = true;
+      requestAnimationFrame(paint);
     };
 
-    // Keep the hot state in sync on element boundary changes while idle.
-    const onOver = (event: MouseEvent) => {
-      mouseRef.current = { x: event.clientX, y: event.clientY };
-      if (!pendingRef.current) {
-        pendingRef.current = true;
-        requestAnimationFrame(paint);
-      }
-    };
-
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseover", onOver);
-    document.addEventListener("mouseout", onOver);
+    // mouseover/mouseout matter too: hovering a new element can change what
+    // sits under a cursor that hasn't moved.
+    const events = ["mousemove", "mouseover", "mouseout"] as const;
+    for (const type of events) {
+      document.addEventListener(type, onMove);
+    }
 
     return () => {
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseover", onOver);
-      document.removeEventListener("mouseout", onOver);
+      for (const type of events) {
+        document.removeEventListener(type, onMove);
+      }
     };
   }, []);
 

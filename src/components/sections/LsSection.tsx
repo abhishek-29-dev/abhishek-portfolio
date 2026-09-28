@@ -1,75 +1,66 @@
-import type { ReactNode } from "react";
+type Kind = "dir" | "doc" | "exe" | "log";
 
-type Kind = "dir" | "doc" | "code" | "exe" | "log";
-
+/** One row of the fake `ls -la` output. `run` makes the name clickable. */
 interface LsRow {
   perms: string;
   links: string;
   owner: string;
+  group: string;
   size: string;
   date: string;
-  label: string;
+  name: string;
   kind: Kind;
-  run?: string; // command triggered when clicked
+  run?: string;
 }
 
 const ROWS: LsRow[] = [
-  { perms: "drwxr-xr-x", links: "3", owner: "abhishek", size: "4096", date: "Sep 01 18:20", label: ".", kind: "dir", run: "home" },
-  { perms: "drwxr-xr-x", links: "5", owner: "abhishek", size: "4096", date: "Sep 01 18:20", label: "..", kind: "dir", run: "home" },
-  { perms: "drwxr-xr-x", links: "3", owner: "abhishek", size: "2048", date: "Sep 02 09:41", label: "src/", kind: "dir" },
-  { perms: "drwxr-xr-x", links: "1", owner: "abhishek", size: "1024", date: "Sep 02 09:40", label: "public/", kind: "dir" },
-  { perms: "drwxr-xr-x", links: "2", owner: "abhishek", size: "512", date: "Sep 01 18:20", label: "projects/", kind: "dir", run: "ls projects/" },
-  { perms: "drwxr-xr-x", links: "2", owner: "abhishek", size: "512", date: "Sep 01 18:20", label: "skills/", kind: "dir", run: "ls skills/" },
-  { perms: "drwxr-xr-x", links: "1", owner: "abhishek", size: "512", date: "Sep 01 18:20", label: ".git/", kind: "dir" },
-  { perms: "-rw-r--r--", links: "1", owner: "abhishek", size: "214", date: "Sep 01 18:20", label: "about.txt", kind: "doc", run: "cat about.txt" },
-  { perms: "-rw-r--r--", links: "1", owner: "abhishek", size: "1024", date: "Sep 01 18:20", label: "experience.log", kind: "log", run: "cat experience.log" },
-  { perms: "-rw-r--r--", links: "1", owner: "abhishek", size: "4821", date: "Sep 01 18:21", label: "README.md", kind: "doc" },
-  { perms: "-rw-r--r--", links: "1", owner: "abhishek", size: "128704", date: "Sep 01 18:21", label: "certificate.pdf", kind: "exe", run: "cat certificate.pdf" },
-  { perms: "-rw-r--r--", links: "1", owner: "abhishek", size: "97290", date: "Sep 01 18:22", label: "resume.pdf", kind: "exe", run: "./download_resume" },
-  { perms: "-rwxr-xr-x", links: "1", owner: "abhishek", size: "2048", date: "Sep 02 09:41", label: "./contact", kind: "exe", run: "./contact" },
-  { perms: "-rwxr-xr-x", links: "1", owner: "abhishek", size: "2048", date: "Sep 02 09:41", label: "./download_resume", kind: "exe", run: "./download_resume" },
+  { perms: "drwxr-xr-x", links: "3", owner: "abhishek", group: "abhishek", size: "4096", date: "Sep 01 18:20", name: ".", kind: "dir", run: "home" },
+  { perms: "drwxr-xr-x", links: "5", owner: "abhishek", group: "abhishek", size: "4096", date: "Sep 01 18:20", name: "..", kind: "dir", run: "home" },
+  { perms: "drwxr-xr-x", links: "3", owner: "abhishek", group: "abhishek", size: "2048", date: "Sep 02 09:41", name: "src/", kind: "dir" },
+  { perms: "drwxr-xr-x", links: "1", owner: "abhishek", group: "abhishek", size: "1024", date: "Sep 02 09:40", name: "public/", kind: "dir" },
+  { perms: "drwxr-xr-x", links: "2", owner: "abhishek", group: "abhishek", size: "512", date: "Sep 01 18:20", name: "projects/", kind: "dir", run: "ls projects/" },
+  { perms: "drwxr-xr-x", links: "2", owner: "abhishek", group: "abhishek", size: "512", date: "Sep 01 18:20", name: "skills/", kind: "dir", run: "ls skills/" },
+  { perms: "drwxr-xr-x", links: "1", owner: "abhishek", group: "abhishek", size: "512", date: "Sep 01 18:20", name: ".git/", kind: "dir" },
+  { perms: "-rw-r--r--", links: "1", owner: "abhishek", group: "abhishek", size: "214", date: "Sep 01 18:20", name: "about.txt", kind: "doc", run: "cat about.txt" },
+  { perms: "-rw-r--r--", links: "1", owner: "abhishek", group: "abhishek", size: "1024", date: "Sep 01 18:20", name: "experience.log", kind: "log", run: "cat experience.log" },
+  { perms: "-rw-r--r--", links: "1", owner: "abhishek", group: "abhishek", size: "4821", date: "Sep 01 18:21", name: "README.md", kind: "doc" },
+  { perms: "-rw-r--r--", links: "1", owner: "abhishek", group: "abhishek", size: "128704", date: "Sep 01 18:21", name: "certificate.pdf", kind: "exe", run: "cat certificate.pdf" },
+  { perms: "-rw-r--r--", links: "1", owner: "abhishek", group: "abhishek", size: "97290", date: "Sep 01 18:22", name: "resume.pdf", kind: "exe", run: "./download_resume" },
+  { perms: "-rwxr-xr-x", links: "1", owner: "abhishek", group: "abhishek", size: "2048", date: "Sep 02 09:41", name: "./contact", kind: "exe", run: "./contact" },
+  { perms: "-rwxr-xr-x", links: "1", owner: "abhishek", group: "abhishek", size: "2048", date: "Sep 02 09:41", name: "./download_resume", kind: "exe", run: "./download_resume" },
 ];
 
+/** Filename colour, by what the file is. */
 const KIND_CLASS: Record<Kind, string> = {
   dir: "ls-dir",
   doc: "ls-doc",
-  code: "ls-code",
   exe: "ls-exe",
   log: "ls-log",
 };
 
-const padEnd = (value: string, width: number) => value.padEnd(width);
-const padStart = (value: string, width: number) => value.padStart(width);
-
-/** One pre-formatted `ls -la` line: aligned columns, colored, clickable name. */
+/** One pre-formatted `ls -la` line: aligned columns, coloured, clickable name. */
 function LsLine({ row }: { row: LsRow }) {
-  const name: ReactNode = row.run ? (
-    <span
-      className={KIND_CLASS[row.kind]}
-      data-run={row.run}
-      style={{ cursor: "pointer" }}
-    >
-      {row.label}
-    </span>
-  ) : (
-    <span className={KIND_CLASS[row.kind]}>{row.label}</span>
-  );
-
   return (
     <div>
       <span className="ls-meta">
-        {padEnd(row.perms, 11)}
-        {padEnd(row.links, 3)}
-        {padEnd(row.owner, 9)}
-        {padEnd(row.owner, 9)}
-        {padStart(row.size, 6)} {row.date}  {" "}
+        {row.perms.padEnd(11)}
+        {row.links.padEnd(4)}
+        {row.owner.padEnd(9)}
+        {row.group.padEnd(9)}
+        {row.size.padStart(7)} {row.date} {"  "}
       </span>
-      {name}
+
+      <span
+        className={`${KIND_CLASS[row.kind]}${row.run ? " clickable" : ""}`}
+        data-run={row.run}
+      >
+        {row.name}
+      </span>
     </div>
   );
 }
 
-/** `ls -la` — a colored, navigable listing of the portfolio directory. */
+/** `ls -la` — a coloured, navigable listing of the portfolio directory. */
 export default function LsSection() {
   return (
     <>
@@ -77,12 +68,12 @@ export default function LsSection() {
 
       <div className="ls-list">
         {ROWS.map((row) => (
-          <LsLine key={row.label} row={row} />
+          <LsLine key={row.name} row={row} />
         ))}
       </div>
 
       <div className="dim ls-meta">
-        total 8 · click a name to open it — dirs are <span className="cyan">cyan</span>,{" "}
+        click a name to open it — dirs are <span className="cyan">cyan</span>,{" "}
         executables <span className="green">green</span>
       </div>
     </>

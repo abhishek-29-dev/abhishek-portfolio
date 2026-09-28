@@ -7,56 +7,56 @@ import { Terminal } from "./components/Terminal";
 import { BlockCursor } from "./components/BlockCursor";
 import { SIDEBAR_COMMANDS } from "./data/commands";
 
+type Theme = "blue" | "green";
+
+const THEME_KEY = "portfolio-theme";
+const BOOT_MS = 3000;
+
+/** Theme is per-tab, so a refresh keeps it without affecting other tabs. */
+function loadTheme(): Theme {
+  return sessionStorage.getItem(THEME_KEY) === "green" ? "green" : "blue";
+}
+
 export default function App() {
-  const [theme, setTheme] = useState<"blue" | "green">(() => {
-    return (sessionStorage.getItem("portfolio-theme") as "blue" | "green") ?? "blue";
-  });
+  const [theme, setTheme] = useState<Theme>(loadTheme);
+  const [booted, setBooted] = useState(false);
+  const [compact, setCompact] = useState(false);
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => {
-      const next = prev === "blue" ? "green" : "blue";
-      sessionStorage.setItem("portfolio-theme", next);
+    setTheme((previous) => {
+      const next = previous === "blue" ? "green" : "blue";
+      sessionStorage.setItem(THEME_KEY, next);
       return next;
     });
   }, []);
 
-  const { blocks, history, cwd, flashKey, activeCommand, runCommand } = useTerminal(toggleTheme);
-  const [ready, setReady] = useState(false);
-  const [compact, setCompact] = useState(false);
-  const finishedRef = useRef(false);
-  const homeShownRef = useRef(false);
+  const { blocks, history, cwd, flashKey, activeCommand, runCommand } =
+    useTerminal(toggleTheme);
 
-  /** Skip the boot screen. Guarded so key + click + timers only fire once. */
-  const finish = useCallback(() => {
-    if (finishedRef.current) {
-      return;
-    }
-    finishedRef.current = true;
-    setReady(true);
-  }, []);
+  // The boot screen always ends: after 3 seconds, or the moment the visitor
+  // clicks it or presses any key. The ref stops all three from firing twice.
+  const bootedRef = useRef(false);
+
+  const finishBoot = useCallback(() => {
+    if (bootedRef.current) return;
+    bootedRef.current = true;
+    setBooted(true);
+    runCommand("home"); // open straight onto the home screen
+  }, [runCommand]);
 
   useEffect(() => {
-    const auto = setTimeout(finish, 3000);
-    const fallback = setTimeout(finish, 4000); // identical to vanilla safety net
-    const onKey = () => finish();
-    window.addEventListener("keydown", onKey);
+    if (bootedRef.current) return; // already booted, nothing left to schedule
+
+    const timer = setTimeout(finishBoot, BOOT_MS);
+    window.addEventListener("keydown", finishBoot);
 
     return () => {
-      clearTimeout(auto);
-      clearTimeout(fallback);
-      window.removeEventListener("keydown", onKey);
+      clearTimeout(timer);
+      window.removeEventListener("keydown", finishBoot);
     };
-  }, [finish]);
+  }, [finishBoot]);
 
-  // Show the home screen exactly once, when boot finishes.
-  useEffect(() => {
-    if (ready && !homeShownRef.current) {
-      homeShownRef.current = true;
-      runCommand("home");
-    }
-  }, [ready, runCommand]);
-
-  // Apply theme + terminal-size classes to body.
+  // Both of these are read by CSS, so they live on <body> as class names.
   useEffect(() => {
     document.body.classList.toggle("theme-green", theme === "green");
   }, [theme]);
@@ -67,10 +67,13 @@ export default function App() {
 
   return (
     <>
-      <BootScreen hidden={ready} onSkip={finish} />
+      <BootScreen hidden={booted} onSkip={finishBoot} />
 
-      <div className={`app ${ready ? "ready" : ""}`}>
-        <TopBar compact={compact} onResize={() => setCompact((prev) => !prev)} />
+      <div className={`app ${booted ? "ready" : ""}`}>
+        <TopBar
+          compact={compact}
+          onResize={() => setCompact((previous) => !previous)}
+        />
 
         <div className="terminal-layout">
           <Sidebar
@@ -82,7 +85,7 @@ export default function App() {
           <Terminal
             blocks={blocks}
             history={history}
-            ready={ready}
+            ready={booted}
             cwd={cwd}
             flashKey={flashKey}
             onCommand={runCommand}

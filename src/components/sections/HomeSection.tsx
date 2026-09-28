@@ -37,14 +37,10 @@ export default function HomeSection() {
         <span className="dim">Try:</span>{" "}
         {SUGGESTED_COMMANDS.map((command, index) => (
           <span key={command}>
-            <span
-              className="cyan"
-              data-run={command}
-              style={{ cursor: "pointer" }}
-            >
+            <span className="cyan clickable" data-run={command}>
               {command}
             </span>
-            {index < SUGGESTED_COMMANDS.length - 1 && <>, </>}
+            {index < SUGGESTED_COMMANDS.length - 1 && ", "}
           </span>
         ))}
       </div>

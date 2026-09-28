@@ -1,11 +1,10 @@
 import { COMMANDS } from "../../data/commands";
 
-const SYSTEM_NAMES = ["pwd", "whoami", "uname", "date", "echo", "history", "ls -la"];
-
 export default function HelpSection() {
-  const navCommands = COMMANDS.filter((c) => !SYSTEM_NAMES.includes(c.name));
-  const systemCommands = COMMANDS.filter((c) => SYSTEM_NAMES.includes(c.name));
+  const pages = COMMANDS.filter((command) => command.group === "page");
+  const system = COMMANDS.filter((command) => command.group === "system");
 
+  // Every alias that isn't already listed by its canonical name above.
   const aliases = COMMANDS.flatMap((command) =>
     command.match.filter((form) => form !== command.name)
   );
@@ -15,21 +14,20 @@ export default function HelpSection() {
       <div className="heading">AVAILABLE COMMANDS</div>
 
       <div style={{ marginTop: 15 }}>
-        {navCommands.map((command) => (
+        {pages.map((command) => (
           <div key={command.name}>
-            <span className="cyan">{command.name}</span> — {command.help}
+            <span className="cyan clickable" data-run={command.name}>
+              {command.name}
+            </span>{" "}
+            — {command.help}
           </div>
         ))}
-
-        <div>
-          <span className="cyan">clear</span> — clear terminal
-        </div>
       </div>
 
       <div style={{ marginTop: 16 }}>
         <div className="dim system-divider">── system ──</div>
 
-        {systemCommands.map((command) => (
+        {system.map((command) => (
           <div key={command.name}>
             <span className="green">{command.name}</span> — {command.help}
           </div>
@@ -39,7 +37,8 @@ export default function HelpSection() {
       <br />
 
       <div className="dim">
-        aliases: {aliases.join(" · ")}
+        Try <span className="cyan">theme</span> to switch colours, or press Tab
+        to autocomplete. Aliases: {aliases.join(" · ")}
       </div>
     </>
   );

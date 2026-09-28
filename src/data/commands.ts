@@ -21,6 +21,10 @@ import {
 /**
  * Single source of truth for the shell. Sidebar buttons, the `help` list,
  * autocomplete and output labels all derive from here — no duplicates.
+ *
+ * `group` only decides which list a command lands in on the `help` screen.
+ * Whether useTerminal renders `Component` or handles the command itself
+ * depends on whether a `Component` is set.
  */
 export const COMMANDS: CommandDef[] = [
   {
@@ -28,6 +32,7 @@ export const COMMANDS: CommandDef[] = [
     display: "help",
     match: ["help"],
     help: "show this list",
+    group: "page",
     Component: HelpSection,
   },
   {
@@ -36,6 +41,7 @@ export const COMMANDS: CommandDef[] = [
     sidebarLabel: "./home",
     match: ["home", "./home"],
     help: "return to homepage",
+    group: "page",
     Component: HomeSection,
   },
   {
@@ -44,6 +50,7 @@ export const COMMANDS: CommandDef[] = [
     sidebarLabel: "cat about.txt",
     match: ["about", "cat about.txt"],
     help: "about me",
+    group: "page",
     Component: AboutSection,
   },
   {
@@ -52,8 +59,9 @@ export const COMMANDS: CommandDef[] = [
     sidebarLabel: "ls skills/",
     match: ["skills", "ls skills/", "tree"],
     help: "list technical skills",
-    cwd: "~/skills",
+    group: "page",
     Component: SkillsSection,
+    cwd: "~/skills",
   },
   {
     name: "projects",
@@ -61,8 +69,9 @@ export const COMMANDS: CommandDef[] = [
     sidebarLabel: "ls projects/",
     match: ["projects", "ls", "ls projects/"],
     help: "view projects",
-    cwd: "~/projects",
+    group: "page",
     Component: ProjectsSection,
+    cwd: "~/projects",
   },
   {
     name: "experience",
@@ -70,6 +79,7 @@ export const COMMANDS: CommandDef[] = [
     sidebarLabel: "cat experience.log",
     match: ["experience", "cat experience.log"],
     help: "view experience",
+    group: "page",
     Component: ExperienceSection,
   },
   {
@@ -78,6 +88,7 @@ export const COMMANDS: CommandDef[] = [
     sidebarLabel: "cat certificate.pdf",
     match: ["certificate", "cat certificate.pdf"],
     help: "view internship certificate",
+    group: "page",
     Component: CertificateSection,
   },
   {
@@ -85,6 +96,7 @@ export const COMMANDS: CommandDef[] = [
     display: "./download_resume",
     match: ["resume", "./download_resume"],
     help: "view / download resume",
+    group: "page",
     Component: ResumeSection,
   },
   {
@@ -93,6 +105,7 @@ export const COMMANDS: CommandDef[] = [
     sidebarLabel: "./contact",
     match: ["contact", "./contact"],
     help: "contact information",
+    group: "page",
     Component: ContactSection,
   },
   {
@@ -100,20 +113,32 @@ export const COMMANDS: CommandDef[] = [
     display: "neofetch",
     match: ["neofetch", "sysinfo", "system"],
     help: "show dev system info",
+    group: "page",
     Component: NeofetchSection,
+  },
+  // System builtins. The first few render a one-liner section; the rest are
+  // handled inside useTerminal because they print text or change shell state.
+  {
+    name: "ls -la",
+    display: "ls -la",
+    match: ["ls -la"],
+    help: "detailed listing of the portfolio",
+    group: "system",
+    Component: LsSection,
   },
   {
     name: "theme",
     display: "theme",
     match: ["theme", "! theme"],
     help: "toggle blue / green terminal theme",
-    Component: NeofetchSection, // placeholder — theme command is handled in useTerminal
+    group: "system",
   },
   {
     name: "pwd",
     display: "pwd",
     match: ["pwd"],
     help: "print the current working directory",
+    group: "system",
     Component: PwdSection,
   },
   {
@@ -121,6 +146,7 @@ export const COMMANDS: CommandDef[] = [
     display: "whoami",
     match: ["whoami"],
     help: "print the current user",
+    group: "system",
     Component: WhoamiSection,
   },
   {
@@ -128,6 +154,7 @@ export const COMMANDS: CommandDef[] = [
     display: "uname -a",
     match: ["uname", "uname -a"],
     help: "print system information",
+    group: "system",
     Component: UnameSection,
   },
   {
@@ -135,6 +162,7 @@ export const COMMANDS: CommandDef[] = [
     display: "date",
     match: ["date"],
     help: "print the current date and time",
+    group: "system",
     Component: DateSection,
   },
   {
@@ -142,23 +170,21 @@ export const COMMANDS: CommandDef[] = [
     display: "echo <text>",
     match: ["echo"],
     help: "print a line of text",
-    dynamic: true,
-    Component: NeofetchSection, // placeholder — echo is handled in useTerminal
+    group: "system",
   },
   {
     name: "history",
     display: "history",
     match: ["history"],
     help: "show the command history",
-    dynamic: true,
-    Component: NeofetchSection, // placeholder — history is handled in useTerminal
+    group: "system",
   },
   {
-    name: "ls -la",
-    display: "ls -la",
-    match: ["ls -la"],
-    help: "detailed listing of the portfolio",
-    Component: LsSection,
+    name: "clear",
+    display: "clear",
+    match: ["clear"],
+    help: "clear the terminal",
+    group: "system",
   },
 ];
 
@@ -178,54 +204,58 @@ export function resolveCommand(input: string): CommandDef | undefined {
   return COMMANDS.find((command) => command.match.includes(key));
 }
 
-/** Levenshtein edit distance between two strings. */
+/** Levenshtein edit distance — how many single-character edits turn a into b. */
 function levenshtein(a: string, b: string): number {
-  const m = a.length;
-  const n = b.length;
-  const dp: number[][] = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
-  for (let i = 0; i <= m; i++) dp[i][0] = i;
-  for (let j = 0; j <= n; j++) dp[0][j] = j;
-  for (let i = 1; i <= m; i++) {
-    for (let j = 1; j <= n; j++) {
-      dp[i][j] = Math.min(
-        dp[i - 1][j] + 1,
-        dp[i][j - 1] + 1,
-        dp[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)
+  // Walking the table one row at a time means only two rows are ever needed:
+  // the one above and the one being filled in.
+  let previous = Array.from({ length: b.length + 1 }, (_, j) => j);
+
+  for (let i = 1; i <= a.length; i++) {
+    const current = [i, ...Array<number>(b.length).fill(0)];
+
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      current[j] = Math.min(
+        previous[j] + 1, // delete a[i-1]
+        current[j - 1] + 1, // insert b[j-1]
+        previous[j - 1] + cost // keep or replace
       );
     }
+
+    previous = current;
   }
-  return dp[m][n];
+
+  return previous[b.length];
 }
 
 /**
- * Suggest a command for a mistyped input.
- * Priority: substring match → Levenshtein distance.
- * Returns the display string of the best match, or undefined.
+ * Suggest a command for a mistyped input, for the "Did you mean" line.
+ * First try to match the spelling (within 3 edits), then fall back to a
+ * partial match. Returns the command's display string, or undefined.
  */
 export function suggestCommand(input: string): string | undefined {
   const key = input.trim().toLowerCase();
   if (!key) return undefined;
 
-  // 1. Substring match: input is contained in a match, or a match is contained in input
-  const substringMatch = ALL_COMMAND_KEYS.find(
-    (form) => key.includes(form) || form.includes(key)
-  );
-  if (substringMatch) {
-    const cmd = COMMANDS.find((c) => c.match.includes(substringMatch));
-    if (cmd) return cmd.display;
-  }
+  let closest: { display: string; distance: number } | undefined;
 
-  // 2. Levenshtein: find the closest match within edit distance 3
-  let bestDistance = Infinity;
-  let bestDisplay: string | undefined;
   for (const command of COMMANDS) {
     for (const form of command.match) {
       const distance = levenshtein(key, form);
-      if (distance < bestDistance && distance <= 3) {
-        bestDistance = distance;
-        bestDisplay = command.display;
+      if (distance <= 3 && distance < (closest?.distance ?? Infinity)) {
+        closest = { display: command.display, distance };
       }
     }
   }
-  return bestDisplay;
+
+  if (closest) return closest.display;
+
+  // No close spelling, so accept a partial one: "proj" → "ls projects/".
+  for (const command of COMMANDS) {
+    if (command.match.some((form) => form.includes(key) || key.includes(form))) {
+      return command.display;
+    }
+  }
+
+  return undefined;
 }

@@ -1,5 +1,5 @@
 interface CommandNotFoundProps {
-  command: string; // normalized (lowercased) text the user typed
+  command: string; // the text the user actually typed
   suggestion?: string; // closest matching command display, if any
 }
 
@@ -12,7 +12,7 @@ export function CommandNotFound({ command, suggestion }: CommandNotFoundProps) {
       {suggestion ? (
         <span className="dim">
           Did you mean{" "}
-          <span className="cyan" data-run={suggestion} style={{ cursor: "pointer" }}>
+          <span className="cyan clickable" data-run={suggestion}>
             {suggestion}
           </span>
           ?

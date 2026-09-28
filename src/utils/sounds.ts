@@ -71,24 +71,17 @@ function blip(
   osc.stop(start + duration);
 }
 
-/** Deciding factor for each sound's character. */
-const TIMBRE: Record<SoundKind, { wave: OscillatorType }> = {
-  key: { wave: "square" },
-  enter: { wave: "sine" },
-  error: { wave: "sawtooth" },
-};
-
-export function playSound(kind: SoundKind) {
-  const wave = TIMBRE[kind].wave;
+/** Each sound is one oscillator sweeping from `frequency` down to `endFrequency`. */
+function playSound(kind: SoundKind) {
   switch (kind) {
     case "key":
-      blip(1400, 1200, 0.035, 0.028, wave);
+      blip(1400, 1200, 0.035, 0.028, "square");
       break;
     case "enter":
-      blip(320, 180, 0.08, 0.035, wave);
+      blip(320, 180, 0.08, 0.035, "sine");
       break;
     case "error":
-      blip(200, 90, 0.22, 0.06, wave);
+      blip(200, 90, 0.22, 0.06, "sawtooth");
       break;
   }
 }

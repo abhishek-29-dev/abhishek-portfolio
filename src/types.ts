@@ -1,8 +1,5 @@
 import type { ComponentType, ReactNode } from "react";
 
-/** A section rendered for a terminal command, plus the data it needs. */
-export type SectionComponent = ComponentType;
-
 /** One entry in the terminal output — a typed command line + its content. */
 export interface OutputBlock {
   id: number;
@@ -18,21 +15,24 @@ export interface CommandDef {
   name: string;
   /** The command line shown in the output block, e.g. "cat about.txt". */
   display: string;
-  /** Every typed form that resolves to this command, e.g. ["about", "whoami", "cat about.txt"]. */
+  /** Every typed form that resolves to this command, e.g. ["about", "cat about.txt"]. */
   match: string[];
-  /** If set, this command also appears as a sidebar button with this label. */
-  sidebarLabel?: string;
   /** One-line description shown in the `help` section. */
   help: string;
-  /** The React component that renders the section content. */
-  Component: SectionComponent;
-  /** Prompt path that this command leaves the shell in (e.g. "~/skills"). Defaults to "~". */
+  /**
+   * Which list this command lands in on the `help` screen. "page" commands
+   * render a section; "system" ones are the plain shell builtins like `pwd`.
+   */
+  group: "page" | "system";
+  /** The section to render. Absent for builtins that just print a line. */
+  Component?: ComponentType;
+  /** If set, this command also appears as a sidebar button with this label. */
+  sidebarLabel?: string;
+  /** Prompt path this command leaves the shell in (e.g. "~/skills"). Defaults to "~". */
   cwd?: string;
-  /** Set for builtins resolved inside useTerminal (arg-takers like echo). */
-  dynamic?: boolean;
 }
 
-/** A link action on a project card or certificate card. */
+/** A link action on a project card. */
 export interface ProjectLink {
   label: string;
   href: string;
@@ -49,8 +49,6 @@ export interface Project {
   links?: ProjectLink[];
   /** Shown under a client project with no public repo. */
   privateNote?: string;
-  /** Optional screenshot thumbnail path (relative to public/), e.g. "projects/recipe-finder.png". */
-  screenshot?: string;
 }
 
 /** A folder node in the skills tree, with its file children. */

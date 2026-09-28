@@ -15,6 +15,9 @@ function ProjectLinkButton({ link }: { link: ProjectLink }) {
 
 /** One project card in the `projects` section. */
 export function ProjectCard({ project }: { project: Project }) {
+  // "#" is a placeholder for a link that isn't public, so hide those buttons.
+  const links = project.links?.filter((link) => link.href !== "#") ?? [];
+
   return (
     <div className="project-terminal-card">
       <h3>
@@ -23,20 +26,6 @@ export function ProjectCard({ project }: { project: Project }) {
 
       <p>{project.description}</p>
 
-      {project.screenshot && (
-        <img
-          src={`/${project.screenshot}`}
-          alt={`${project.name} preview`}
-          style={{
-            width: "100%",
-            maxWidth: 420,
-            height: "auto",
-            marginTop: 10,
-            border: "1px solid var(--border)",
-          }}
-        />
-      )}
-
       <div className="tags">
         {project.tags.map((tag) => (
           <span key={tag}>{tag}</span>
@@ -44,18 +33,14 @@ export function ProjectCard({ project }: { project: Project }) {
       </div>
 
       {project.privateNote && (
-        <div className="dim" style={{ marginTop: 10, fontSize: 9 }}>
-          {project.privateNote}
-        </div>
+        <div className="dim project-note">{project.privateNote}</div>
       )}
 
-      {project.links && project.links.filter(link => link.href !== "#").length > 0 && (
-        <div className="certificate-actions" style={{ marginTop: 10 }}>
-          {project.links
-            .filter((link) => link.href !== "#")
-            .map((link) => (
-              <ProjectLinkButton key={link.href} link={link} />
-            ))}
+      {links.length > 0 && (
+        <div className="certificate-actions project-links">
+          {links.map((link) => (
+            <ProjectLinkButton key={link.href} link={link} />
+          ))}
         </div>
       )}
     </div>

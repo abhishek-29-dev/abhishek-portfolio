@@ -54,7 +54,6 @@ export function BootScreen({ hidden, onSkip }: BootScreenProps) {
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hidden, countActive]);
 
   // Closing lines pace out after the count ends.

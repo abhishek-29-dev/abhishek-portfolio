@@ -24,13 +24,12 @@ export function Terminal({ blocks, history, ready, cwd, flashKey, onCommand }: T
     }
   }, [blocks]);
 
-  // Event delegation: clicking any element with data-run triggers that command.
+  // Event delegation: clicking any element with data-run runs that command,
+  // so the sections don't each need their own onClick.
   const handleBodyClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const target = event.target as HTMLElement;
-    const runEl = target.closest<HTMLElement>("[data-run]");
-    if (runEl) {
-      onCommand(runEl.dataset.run!);
-    }
+    const command = target.closest<HTMLElement>("[data-run]")?.dataset.run;
+    if (command) onCommand(command);
   };
 
   return (
