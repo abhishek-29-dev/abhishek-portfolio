@@ -8,6 +8,6 @@ export const contact = {
 const BASE = import.meta.env.BASE_URL;
 
 export const pdfs = {
-  resume: `${BASE}Abhishek_J_Resume.pdf`,
-  certificate: `${BASE}Abhishek_J_Internship_Certificate.pdf`,
+  resume: `${BASE}resume.pdf`,
+  certificate: `${BASE}Internship_Certificate.pdf`,
 } as const;

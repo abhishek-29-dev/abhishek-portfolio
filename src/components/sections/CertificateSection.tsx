@@ -9,7 +9,7 @@ export default function CertificateSection() {
         <div className="certificate-status">
           <span className="green">●</span>
           <span className="green">FILE PRESENT</span>
-          <span className="dim">/Abhishek_J_Internship_Certificate.pdf</span>
+          <span className="dim">/Internship_Certificate.pdf</span>
         </div>
 
         <h3>Ratxen Solutions Private Limited</h3>
@@ -54,7 +54,7 @@ export default function CertificateSection() {
 
       <div className="dim">
         Certificate is hosted in the portfolio repo at{" "}
-        <span className="cyan">public/Abhishek_J_Internship_Certificate.pdf</span>{" "}
+        <span className="cyan">public/Internship_Certificate.pdf</span>{" "}
         and served with the site.
       </div>
     </>
