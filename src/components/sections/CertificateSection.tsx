@@ -22,10 +22,10 @@ export default function CertificateSection() {
             <span className="green">intern</span> = "Abhishek J"
           </div>
           <div>
-            <span className="green">duration</span> = "19 Feb 2026 → 20 May 2026 (90 Days)"
+            <span className="green">duration</span> = "Feb 2026 → May 2026 (90 Days)"
           </div>
           <div>
-            <span className="green">role</span> = "Full Stack Development & Digital Marketing"
+            <span className="green">role</span> = "Full Stack &amp; WordPress Development Intern"
           </div>
           <div>
             <span className="green">rating</span> = "Excellent · 6.0 / 6.0"

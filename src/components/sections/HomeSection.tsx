@@ -21,12 +21,13 @@ export default function HomeSection() {
         {" · "}
         <span className="cyan">Frontend Developer</span>
         {" · "}
-        <span className="yellow">WordPress Developer</span>
+        <span className="yellow">React &amp; TypeScript</span>
       </div>
 
       <div style={{ marginTop: 18 }} className="dim">
-        I build responsive websites, e-commerce experiences and
-        React-based user interfaces.
+        I build fast, clean interfaces in React and TypeScript, and I&apos;ve
+        spent a 3-month internship keeping two live WordPress client sites
+        running.
       </div>
 
       <div style={{ marginTop: 24 }}>

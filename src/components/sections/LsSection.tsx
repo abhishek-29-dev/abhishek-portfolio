@@ -25,7 +25,7 @@ const ROWS: LsRow[] = [
   { perms: "-rw-r--r--", links: "1", owner: "abhishek", group: "abhishek", size: "1024", date: "Sep 01 18:20", name: "experience.log", kind: "log", run: "cat experience.log" },
   { perms: "-rw-r--r--", links: "1", owner: "abhishek", group: "abhishek", size: "4821", date: "Sep 01 18:21", name: "README.md", kind: "doc" },
   { perms: "-rw-r--r--", links: "1", owner: "abhishek", group: "abhishek", size: "128704", date: "Sep 01 18:21", name: "certificate.pdf", kind: "exe", run: "cat certificate.pdf" },
-  { perms: "-rw-r--r--", links: "1", owner: "abhishek", group: "abhishek", size: "97290", date: "Sep 01 18:22", name: "resume.pdf", kind: "exe", run: "./download_resume" },
+  { perms: "-rw-r--r--", links: "1", owner: "abhishek", group: "abhishek", size: "49286", date: "Oct 01 15:33", name: "resume.pdf", kind: "exe", run: "./download_resume" },
   { perms: "-rwxr-xr-x", links: "1", owner: "abhishek", group: "abhishek", size: "2048", date: "Sep 02 09:41", name: "./contact", kind: "exe", run: "./contact" },
   { perms: "-rwxr-xr-x", links: "1", owner: "abhishek", group: "abhishek", size: "2048", date: "Sep 02 09:41", name: "./download_resume", kind: "exe", run: "./download_resume" },
 ];

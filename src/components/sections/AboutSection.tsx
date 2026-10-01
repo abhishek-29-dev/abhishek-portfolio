@@ -20,28 +20,23 @@ export default function AboutSection() {
       </div>
 
       <div>
-        <span className="green">focus</span> = "Web Development / UI / WordPress"
+        <span className="green">focus</span> = "React &amp; TypeScript / Frontend"
       </div>
 
       <br />
 
       <div className="dim">
-        I'm a BCA graduate interested in building practical, responsive
-        and user-friendly web experiences.
+        Frontend developer who likes building fast, clean interfaces in React
+        and TypeScript. Spent a 3-month internship keeping two live WordPress
+        client sites running, and built and deployed several projects that work
+        with real APIs.
 
         <br />
         <br />
 
-        During my internship at Ratxen Solutions, I worked on Nexa Styles
-        and production WordPress websites.
-
-        <br />
-        <br />
-
-        I've also been building out a set of React projects — a recipe
-        search app, an expense tracker — to go deeper on component
-        architecture, state, and TypeScript. See{" "}
-        <span className="cyan">projects</span> for links.
+        Looking for a frontend or React role where I can keep learning and ship
+        things people actually use. See <span className="cyan">projects</span>{" "}
+        for links.
       </div>
 
       <br />

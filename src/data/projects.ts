@@ -3,36 +3,9 @@ import type { Project } from "../types";
 export const projects: Project[] = [
   {
     id: "01",
-    name: "nexa-styles/",
-    description:
-      "E-commerce platform developed during my internship at Ratxen Solutions. Built a single checkout flow integrating payment gateway, subscription billing and shipping API modules.",
-    tags: ["WordPress", "Payment API", "Subscription", "Shipping API"],
-    privateNote: "client project — private repo, no public link",
-  },
-  {
-    id: "02",
-    name: "recipe-finder/",
-    description:
-      "Recipe search app built with React, hitting a live public API. Debounced search, a responsive card grid, a detail modal with full ingredients and instructions, and a favorites system using React state.",
-    tags: ["React", "JavaScript", "Tailwind CSS", "REST API"],
-    links: [
-      {
-        label: "live demo",
-        href: "https://recipe-finder-abhi-64da.vercel.app",
-        external: true,
-      },
-      {
-        label: "view code",
-        href: "https://github.com/abhishek-29-dev/recipe-finder",
-        external: true,
-      },
-    ],
-  },
-  {
-    id: "03",
     name: "expense-tracker/",
     description:
-      "Expense tracker built with React and TypeScript — typed Expense and Category interfaces throughout, no \"any\". Category spending chart with Recharts, plus date-range and category filtering with a live-updating total.",
+      "Fully typed expense tracker — its own Expense and Category interfaces, no use of any. Spending charts by category with Recharts, date-range and category filters, and a running total.",
     tags: ["React", "TypeScript", "Recharts", "Tailwind CSS"],
     links: [
       {
@@ -48,39 +21,39 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "04",
-    name: "mva-trust & ncpl/",
+    id: "02",
+    name: "recipe-finder/",
     description:
-      "Two live production WordPress sites maintained end to end during the internship — theme customization, plugin work and load-time optimization, with 100% uptime across the engagement.",
-    tags: ["WordPress", "Theme Dev", "Performance"],
+      "Responsive recipe search with debounced input, a card grid and a detail modal, powered by TheMealDB API. Favorites built with React state, plus loading skeletons and clear empty and error states so slow or failed requests don't leave users stuck.",
+    tags: ["React", "JavaScript", "Tailwind CSS", "TheMealDB API"],
     links: [
       {
-        label: "mvatrust.com",
-        href: "https://mvatrust.com",
+        label: "live demo",
+        href: "https://recipe-finder-abhi-64da.vercel.app",
         external: true,
       },
       {
-        label: "ncpl.net.in",
-        href: "https://ncpl.net.in",
+        label: "view code",
+        href: "https://github.com/abhishek-29-dev/recipe-finder",
         external: true,
       },
     ],
   },
   {
-    id: "05",
-    name: "portfolio/",
+    id: "03",
+    name: "terminal-portfolio/",
     description:
-      "Personal developer portfolio built from scratch — now rebuilt with React and TypeScript. An interactive terminal interface with command history, autocomplete and keyboard navigation.",
-    tags: ["React", "TypeScript", "Vite", "Responsive UI"],
+      "Interactive terminal-style portfolio with a custom command interpreter and full keyboard navigation, hosted on GitHub Pages.",
+    tags: ["React", "TypeScript", "Vite", "CSS"],
     links: [
       {
-        label: "live demo",
-        href: "https://abhishek-portfolio-sandy.vercel.app",
+        label: "live site",
+        href: "https://abhishek-29-dev.github.io/abhishek-portfolio/",
         external: true,
       },
       {
-        label: "view on github",
-        href: "https://github.com/abhishek-29-dev",
+        label: "view code",
+        href: "https://github.com/abhishek-29-dev/abhishek-portfolio",
         external: true,
       },
     ],

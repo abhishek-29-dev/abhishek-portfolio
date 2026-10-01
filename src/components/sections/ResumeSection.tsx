@@ -9,7 +9,7 @@ export default function ResumeSection() {
         <div className="certificate-status">
           <span className="green">●</span>
           <span>FILE FOUND</span>
-          <span className="dim">/resume/resume.pdf</span>
+          <span className="dim">{`${import.meta.env.BASE_URL}resume.pdf`}</span>
         </div>
 
         <h3>Abhishek J — Frontend Developer</h3>
