@@ -2,38 +2,41 @@ import type { SkillGroup } from "../types";
 
 export const skillGroups: SkillGroup[] = [
   {
+    name: "languages/",
+    items: ["JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3"],
+  },
+  {
     name: "frontend/",
     items: [
-      "HTML5",
-      "CSS3",
-      "JavaScript",
-      "TypeScript",
       "React",
-      "React Hooks",
       "React Router",
       "Tailwind CSS",
-      "Flexbox & Grid",
+      "Recharts",
       "Responsive Design",
     ],
   },
   {
-    name: "cms/",
-    items: ["WordPress", "Custom CSS", "Plugin Development"],
-  },
-  {
-    name: "tools/",
+    name: "concepts/",
     items: [
-      "Git",
-      "GitHub",
-      "VS Code",
-      "Vite",
-      "Vercel",
-      "npm",
-      "REST APIs",
+      "Component-Based Architecture",
+      "State Management",
+      "REST API Integration",
+      "Debouncing",
+      "Type-Safe Code",
+      "Loading & Error States",
     ],
   },
   {
-    name: "other/",
-    items: ["Recharts", "Fetch / Axios", "Session Storage", "JSON"],
+    name: "cms/",
+    items: [
+      "WordPress",
+      "Theme Customization",
+      "Plugin Development",
+      "E-Commerce Setup",
+    ],
+  },
+  {
+    name: "tools/",
+    items: ["Git", "GitHub", "GitHub Pages", "Vite", "Vercel", "VS Code"],
   },
 ];
